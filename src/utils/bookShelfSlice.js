@@ -4,11 +4,16 @@ const shelf =
     ? JSON.parse(localStorage.getItem("shelfList"))
     : [];
 
+const hide =
+  localStorage.getItem("hideButton") != true
+    ? JSON.parse(localStorage.getItem("hideButton"))
+    : true;
+
 const bookShelfSlice = createSlice({
   name: "bookshelf",
   initialState: {
     shelflist: shelf,
-    hideButton: true,
+    hideButton: hide,
   },
   reducers: {
     addBooks: (state, action) => {
@@ -25,6 +30,7 @@ const bookShelfSlice = createSlice({
     },
     toggleHideButton: (state) => {
       state.hideButton = !state.hideButton;
+      localStorage.setItem("hideButton", JSON.stringify(state.hideButton));
     },
   },
 });
