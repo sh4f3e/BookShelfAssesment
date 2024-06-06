@@ -2,10 +2,13 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import BookCard from "./BookCard";
 import { Link } from "react-router-dom";
-import { clearShelf } from "../utils/bookShelfSlice";
+import { clearShelf, toggleHideButton } from "../utils/bookShelfSlice";
 
 const BookShelf = () => {
   const dispatch = useDispatch();
+  const handleHideButton = () => {
+    dispatch(toggleHideButton());
+  };
   const handleClearShelf = () => {
     dispatch(clearShelf());
   };
@@ -15,18 +18,26 @@ const BookShelf = () => {
     <div>
       <div className="flex justify-between">
         <Link to="/">
-          <button className="bg-green-600 px-6 py-2 rounded-lg text-white ml-6 mt-4 ">
+          <button
+            className="hover:bg-green-700 bg-green-600 px-6 py-2 rounded-lg text-white ml-6 mt-4 "
+            onClick={handleHideButton}
+          >
             Home
           </button>
         </Link>
         <button
           onClick={handleClearShelf}
-          className="bg-red-600 px-6 py-2 rounded-lg text-white ml-6 mt-4 mr-5"
+          className="hover:bg-red-700 bg-red-600 px-6 py-2 rounded-lg text-white ml-6 mt-4 mr-5"
         >
           Clear BookShelf
         </button>
       </div>
-      <div className="flex flex-wrap">
+      {books?.length === 0 && (
+        <h1 className="text-center font-bold p-4 my-10">
+          Bookshelf is empty. Add 📚books to the Bookshelf!
+        </h1>
+      )}
+      <div className="flex flex-wrap ml-14 md:ml-0">
         {books.map((book, index) => (
           <BookCard key={index} books={book} />
         ))}

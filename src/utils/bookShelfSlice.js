@@ -8,6 +8,7 @@ const bookShelfSlice = createSlice({
   name: "bookshelf",
   initialState: {
     shelflist: shelf,
+    hideButton: true,
   },
   reducers: {
     addBooks: (state, action) => {
@@ -20,9 +21,14 @@ const bookShelfSlice = createSlice({
     },
     clearShelf: (state, action) => {
       state.shelflist.length = 0;
+      localStorage.clear();
+    },
+    toggleHideButton: (state) => {
+      state.hideButton = !state.hideButton;
     },
   },
 });
 
-export const { addBooks, clearShelf } = bookShelfSlice.actions;
+export const { addBooks, clearShelf, toggleHideButton } =
+  bookShelfSlice.actions;
 export default bookShelfSlice.reducer;
