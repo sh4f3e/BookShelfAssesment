@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addBooks } from "../utils/bookShelfSlice";
+import { useSearchParams } from "react-router-dom";
 
-const BookCard = ({ books }) => {
-  const showButton = useSelector((store) => store.bookShelf?.hideButton);
+const BookCard = ({ books, location }) => {
   const dispatch = useDispatch();
   const [buttonClick, setButtonClick] = useState(false);
   const handleAdd = (books) => {
@@ -20,7 +20,9 @@ const BookCard = ({ books }) => {
         <h2>{books?.edition_count}</h2>
       </div>
 
-      {showButton && (
+      {location === "/bookshelf" ? (
+        <div></div>
+      ) : (
         <div className="py-5">
           <button
             disabled={buttonClick}

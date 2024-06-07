@@ -1,10 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import BookCard from "./BookCard";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { clearShelf, toggleHideButton } from "../utils/bookShelfSlice";
 
 const BookShelf = () => {
+  const location = useLocation();
   const dispatch = useDispatch();
   const handleHideButton = () => {
     dispatch(toggleHideButton());
@@ -13,7 +14,6 @@ const BookShelf = () => {
     dispatch(clearShelf());
   };
   const books = useSelector((store) => store?.bookShelf?.shelflist);
-  console.log(books);
   return (
     <div>
       <div className="flex justify-between">
@@ -39,7 +39,7 @@ const BookShelf = () => {
       )}
       <div className="flex flex-wrap ml-14 md:ml-0">
         {books.map((book, index) => (
-          <BookCard key={index} books={book} />
+          <BookCard key={index} books={book} location={location?.pathname} />
         ))}
       </div>
     </div>

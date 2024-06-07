@@ -6,16 +6,12 @@ import { toggleHideButton } from "../utils/bookShelfSlice";
 
 const Body = () => {
   const dispatch = useDispatch();
-  const handleHideButton = () => {
-    dispatch(toggleHideButton());
-  };
 
   const searchText = useRef();
   const [search, setSearch] = useState();
   const handleSearch = () => {
     const inputText = searchText?.current?.value;
     setSearch(inputText);
-    console.log(searchText?.current?.value);
   };
   return (
     <div>
@@ -34,10 +30,7 @@ const Body = () => {
         </button>
       </div>
       <Link to="./bookshelf">
-        <button
-          className="bg-green-600 hover:bg-green-700 px-6 py-2 rounded-lg text-white mx-5 my-5"
-          onClick={handleHideButton}
-        >
+        <button className="bg-green-600 hover:bg-green-700 px-6 py-2 rounded-lg text-white mx-5 my-5">
           My BookShelf
         </button>
       </Link>
