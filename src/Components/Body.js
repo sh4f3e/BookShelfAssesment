@@ -15,7 +15,7 @@ const Body = () => {
   };
   return (
     <div>
-      <div className="flex justify-center py-10">
+      <div className="flex justify-center p-10">
         <input
           ref={searchText}
           type="text"
